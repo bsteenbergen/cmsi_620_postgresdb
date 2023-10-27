@@ -7,7 +7,14 @@ SOURCE = 'GlobalLandTemperaturesByCity.csv'
 with open(SOURCE, 'r+', encoding='utf-8') as f:
     reader = csv.reader(f)
     next(reader)
+
+    rows = []
     for row in reader:
+        rows.append(tuple(row))
+    
+    list(set([r for r in rows]))
+
+    for row in rows:
         if '' in row:
             continue
         else:
