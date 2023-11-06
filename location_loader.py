@@ -20,13 +20,12 @@ with open(SOURCE, 'r+', encoding='utf-8') as f:
         if '' in row:
             continue
         else:
-            city = row[3]
-            country = row[4]
+            city = row[3].replace('\'', ' ')
+            country = row[4].replace('\'', ' ')
             latitude = row[5]
             longitude = row[6]
             location_key = (city, country)
             if location_key in locations:
-                print("HELLOEF:OEHFIAEFHAOEI")
                 continue
             else:
                 locations.add(location_key)
