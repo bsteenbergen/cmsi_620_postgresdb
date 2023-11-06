@@ -4,6 +4,8 @@ import re
 print('BEGIN;')
 
 SOURCE = 'GlobalLandTemperaturesByCity.csv'
+
+locations = set()
 with open(SOURCE, 'r+', encoding='utf-8') as f:
     reader = csv.reader(f)
     next(reader)
@@ -22,7 +24,12 @@ with open(SOURCE, 'r+', encoding='utf-8') as f:
             country = row[4]
             latitude = row[5]
             longitude = row[6]
-
-        print(f'INSERT INTO location VALUES(\'{city}\', \'{country}\', \'{latitude}\', \'{longitude}\');')
+            location_key = (city, country)
+            if location_key in locations:
+                print("HELLOEF:OEHFIAEFHAOEI")
+                continue
+            else:
+                locations.add(location_key)
+                print(f'INSERT INTO location VALUES(\'{city}\', \'{country}\', \'{latitude}\', \'{longitude}\');')
 
 print('COMMIT;')
