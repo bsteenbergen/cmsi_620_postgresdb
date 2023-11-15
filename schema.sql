@@ -1,3 +1,10 @@
+-- SCHEMA: schema
+
+-- DROP SCHEMA IF EXISTS schema ;
+
+CREATE SCHEMA IF NOT EXISTS schema
+    AUTHORIZATION postgres;
+	
 CREATE TABLE location (
   city VARCHAR,
   country VARCHAR,
