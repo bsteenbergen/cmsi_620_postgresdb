@@ -1,43 +1,41 @@
--- -- SCHEMA: schema
+CREATE TABLE country_sea (
+    country VARCHAR PRIMARY KEY,
+    sea VARCHAR
+);
 
--- -- DROP SCHEMA IF EXISTS schema ;
-
--- CREATE SCHEMA IF NOT EXISTS schema
---     AUTHORIZATION postgres;
-	
 CREATE TABLE location (
   city VARCHAR,
   country VARCHAR,
   latitude VARCHAR,
   longitude VARCHAR,
-  PRIMARY KEY (city, country)
+  PRIMARY KEY (city, country),
+  FOREIGN KEY (country) REFERENCES country_sea(country)
 );
 
 CREATE TABLE temperature (
+  temperature_id SERIAL PRIMARY KEY,
   city VARCHAR,
   country VARCHAR,
   date_collected DATE,
   avg_temp FLOAT,
   avg_temp_uncertainty FLOAT,
-  FOREIGN KEY (city, country) REFERENCES location
+  FOREIGN KEY (country) REFERENCES country_sea(country)
 );
 
-CREATE TABLE country_sea (
-    country VARCHAR,
-    sea VARCHAR
-);
-
-CREATE TABLE mean_sea_level(
-    object_id INT PRIMARY KEY,
-    country VARCHAR,
-    iso2 VARCHAR,
-    iso3 VARCHAR,
-    indicator VARCHAR,
+CREATE TABLE mean_sea_level (
+    id INT PRIMARY KEY,
     unit VARCHAR,
-    source VARCHAR,
-    cts_code VARCHAR,
-    cts_name VARCHAR,
-    measure VARCHAR,
-    date DATE,
-    value FLOAT
+    sea_name VARCHAR,
+    date_measured DATE,
+    sea_level FLOAT
+);
+
+CREATE TABLE emissions (
+  emissions_id SERIAL PRIMARY KEY,
+  country VARCHAR,
+  year_measured INT,
+  population BIGINT,
+  co2 FLOAT,
+  cumulative_co2 FLOAT,
+  FOREIGN KEY (country) REFERENCES country_sea(country)
 );

@@ -2,6 +2,7 @@
 GlobalLandTemperaturesByCity.csv
 Change_in_Mean_Sea_Levels.csv
 owid-co2-data.csv
+country_sea.csv
 
 # Logs
 logs
