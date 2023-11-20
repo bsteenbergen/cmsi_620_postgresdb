@@ -16,18 +16,15 @@ with open(SOURCE, 'r+', encoding='utf-8') as f:
     list(set([r for r in rows]))
 
     for row in rows:
-        if '' in row:
+        city = row[3].replace('\'', ' ')
+        country = row[4].replace('\'', ' ')
+        latitude = row[5]
+        longitude = row[6]
+        location_key = (city, country)
+        if location_key in locations:
             continue
         else:
-            city = row[3].replace('\'', ' ')
-            country = row[4].replace('\'', ' ')
-            latitude = row[5]
-            longitude = row[6]
-            location_key = (city, country)
-            if location_key in locations:
-                continue
-            else:
-                locations.add(location_key)
-                print(f'INSERT INTO location VALUES(\'{city}\', \'{country}\', \'{latitude}\', \'{longitude}\');')
+            locations.add(location_key)
+            print(f'INSERT INTO location VALUES(\'{city}\', \'{country}\', \'{latitude}\', \'{longitude}\');')
 
 print('COMMIT;')
